@@ -25,6 +25,9 @@ void show_double(double val)
     show_bytes((byte_pointer) &val, sizeof(double));
 }
 
+/*
+  编写程序show_short, show_long和show_double，它们分别打印类型为short, long和double的C语言对象的字节表示。请试着在几种机器上运行。
+ */
 int main(void)
 {
     int val = 0x87654321;
