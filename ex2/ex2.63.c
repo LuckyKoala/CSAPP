@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../util/printer.h"
 
 unsigned srl(unsigned x, int k)
 {
@@ -11,10 +12,11 @@ unsigned srl(unsigned x, int k)
 int sra(int x, int k)
 {
   int xsrl = (unsigned) x >> k;
-
-  int highest_ones = (~0)<<((sizeof(int)<<3)-k); //11110000xxxx0000
-  int highest_one_mask = (~0)<<((sizeof(int)<<3)-1); //1000xxxxxxxx0000
-  //int mask = highest_ones & !!(highest_one_mask & x)
+  unsigned w = sizeof(int)<<3;
+  int highest_ones = (~0)<<(w-k); //11110000xxxx0000
+  int sign_mask = 1<<(w-k-1); //00001000xxxx0000
+  int sign = xsrl & sign_mask;
+  int mask = highest_ones + ((sign<<1)^(1<<(w-k)));
   return xsrl | mask;
 }
 
@@ -24,5 +26,9 @@ int sra(int x, int k)
 
 int main(void)
 {
-  //To be continued
+  printf("Testing...\n");
+  printf("-1 >> 3 = ");
+  show_int(srl(-1, 3));
+  printf("-1 >> 3 = ");
+  show_int(sra(-1, 3));
 }
