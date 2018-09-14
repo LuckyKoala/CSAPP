@@ -2,7 +2,7 @@
 
 int any_odd_one(unsigned x)
 {
-  int mask = 0xAAAAAAAA;
+  int mask = 0x55555555; // if index start with 1, eg 1...32
   return !!(x & mask);
 }
 
